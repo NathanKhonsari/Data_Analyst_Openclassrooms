@@ -1,0 +1,12 @@
+SELECT c.code_departement AS departement,
+ROUND(AVG( (CAST (v.valeur AS FLOAT) / b.surface_carrez) ), 0)
+AS prix_au_m2_reel
+FROM vente v
+JOIN
+bien b ON v.id_bien = b.id_bien
+JOIN
+commune c ON b.id_codedep_codecommune = c.id_codedep_codecommune
+WHERE v.valeur <> ''
+GROUP BY departement
+ORDER BY prix_au_m2_reel DESC
+LIMIT 10;

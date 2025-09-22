@@ -1,0 +1,16 @@
+WITH ventes_t1_2020 AS (
+SELECT COUNT(v.id_vente) AS nb_ventes_t1_2020
+FROM vente v
+WHERE v.date BETWEEN '2020-01-01' AND '2020-03-31'
+),
+ventes_t2_2020 AS (
+SELECT COUNT(v.id_vente) AS nb_ventes_t2_2020
+FROM vente v
+WHERE v.date BETWEEN '2020-04-01' AND '2020-06-30'
+)
+SELECT ventes_t1_2020.nb_ventes_t1_2020 AS nb_ventes_t1_2020,
+ventes_t2_2020.nb_ventes_t2_2020 AS nb_ventes_t2_2020,
+FORMAT('%.1f%%', CAST ( (ventes_t2_2020.nb_ventes_t2_2020 -
+ventes_t1_2020.nb_ventes_t1_2020) AS FLOAT) /
+ventes_t1_2020.nb_ventes_t1_2020 * 100) AS evolution_T2_vs_T1
+FROM ventes_t1_2020, ventes_t2_2020;

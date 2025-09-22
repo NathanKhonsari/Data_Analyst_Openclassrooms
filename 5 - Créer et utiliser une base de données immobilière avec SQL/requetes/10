@@ -1,0 +1,23 @@
+WITH appart_2_pieces AS (
+    SELECT ROUND(AVG(v.valeur / b.surface_carrez), 0) AS prix_m2_2P
+    FROM vente v
+    JOIN bien b ON v.id_bien = b.id_bien
+    WHERE b.type_local = 'Appartement'
+      AND v.valeur <> ''
+      AND b.nombre_pieces = 2
+),
+appart_3_pieces AS (
+    SELECT ROUND(AVG(v.valeur / b.surface_carrez), 0) AS prix_m2_3P
+    FROM vente v
+    JOIN bien b ON v.id_bien = b.id_bien
+    WHERE b.type_local = 'Appartement'
+      AND v.valeur <> ''
+      AND b.nombre_pieces = 3
+)
+SELECT 
+    appart_2_pieces.prix_m2_2P AS prix_m2_reel_appartements_2_pieces,
+    appart_3_pieces.prix_m2_3P AS prix_m2_reel_appartements_3_pieces,
+    ROUND(((appart_3_pieces.prix_m2_3P - appart_2_pieces.prix_m2_2P) * 100.0) / appart_2_pieces.prix_m2_2P, 1) || '%' 
+        AS difference_2_pieces_vs_3_pieces
+FROM appart_2_pieces, appart_3_pieces;
+

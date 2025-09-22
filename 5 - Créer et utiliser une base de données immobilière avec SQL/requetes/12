@@ -1,0 +1,11 @@
+SELECT c.nom_commune AS commune,
+       FORMAT('%.2f', CAST(COUNT(v.id_vente) AS FLOAT) * 1000 /
+       (p.population_municipale + p.population_comptee_a_part)) AS transactions_pour_1000_habitants
+FROM vente v
+JOIN bien b ON v.id_bien = b.id_bien
+JOIN commune c ON b.id_codedep_codecommune = c.id_codedep_codecommune
+JOIN population p ON c.id_codedep_codecommune = p.id_codedep_codecommune
+WHERE (p.population_municipale + p.population_comptee_a_part) > 10000
+GROUP BY commune
+ORDER BY transactions_pour_1000_habitants DESC
+LIMIT 20;

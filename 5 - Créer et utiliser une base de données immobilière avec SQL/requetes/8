@@ -1,0 +1,14 @@
+SELECT r.nom_region AS region,
+ROUND(AVG(v.valeur / b.surface_carrez), 0) AS prix_au_m2_reel
+FROM vente v
+JOIN
+bien b ON v.id_bien = b.id_bien
+JOIN
+commune c ON b.id_codedep_codecommune = c.id_codedep_codecommune
+JOIN
+region r ON c.code_region = r.code_region
+WHERE b.type_local = 'Appartement' AND
+b.nombre_pieces > 4 AND 
+v.valeur <> ''
+GROUP BY region
+ORDER BY prix_au_m2_reel DESC;

@@ -1,0 +1,14 @@
+SELECT v.id_bien AS id_bien,
+v.valeur AS valeur,
+r.nom_region AS region,
+b.surface_carrez AS surface_carrez_en_m2
+FROM vente v
+JOIN
+bien b ON v.id_bien = b.id_bien
+JOIN
+commune c ON b.id_codedep_codecommune = c.id_codedep_codecommune
+JOIN
+region r ON c.code_region = r.code_region
+WHERE b.type_local = 'Appartement' AND v.valeur <> ''
+ORDER BY valeur DESC
+LIMIT 10;

@@ -1,0 +1,12 @@
+SELECT 
+  c.nom_commune AS commune,
+  c.code_departement AS departement,
+  ROUND(AVG(v.valeur), 0) AS moyenne_valeurs_foncieres
+FROM vente v
+JOIN bien b ON v.id_bien = b.id_bien
+JOIN commune c ON b.id_codedep_codecommune = c.id_codedep_codecommune
+WHERE c.code_departement IN ('06', '13', '33', '59', '69')
+  AND v.valeur <> ''
+GROUP BY c.nom_commune, c.code_departement
+ORDER BY moyenne_valeurs_foncieres DESC
+LIMIT 3;

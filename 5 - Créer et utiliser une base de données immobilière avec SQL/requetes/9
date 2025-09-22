@@ -1,0 +1,10 @@
+SELECT c.nom_commune AS commune,
+COUNT(v.id_vente) AS nombre_de_ventes_T1
+FROM vente v
+JOIN
+bien b On v.id_bien = b.id_bien
+JOIN commune c ON b.id_codedep_codecommune = c.id_codedep_codecommune
+WHERE v.date BETWEEN '2020-01-01' AND '2020-03-31'
+GROUP BY commune
+HAVING nombre_de_ventes_T1 >= 50
+ORDER BY nombre_de_ventes_T1 DESC;
