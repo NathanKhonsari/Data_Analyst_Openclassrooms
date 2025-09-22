@@ -1,0 +1,28 @@
+Corrélations négatives fortes :
+
+    total_sales et price : -0.52
+    → Plus le prix augmente, plus les ventes totales diminuent (relation logique, la demande baisse avec un prix élevé).
+
+    total_sales et Prix_HT : -0.52
+    → Même logique que ci-dessus, car Prix_HT est lié au price.
+
+Corrélations positives fortes :
+
+    price et purchase_price : 0.97
+    → Le prix de vente est fortement lié au prix d’achat (logique, les produits avec un coût d'achat élevé sont revendus plus cher).
+
+    Prix_HT et purchase_price : 0.97
+    → Même observation.
+
+Corrélation modérée :
+
+    stock_quantity et total_sales : 0.44
+    → Une quantité de stock plus élevée est légèrement associée à des ventes plus importantes.
+
+Corrélations faibles ou insignifiantes :
+
+    taux_marge et total_sales : 0.011
+    → Aucune corrélation significative entre le taux de marge et les ventes.
+
+    stock_quantity et price : -0.086
+    → Très faible corrélation, donc le stock n’influence pas directement le prix.
